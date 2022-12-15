@@ -1,6 +1,6 @@
 import React from "react";
 
-const Connected = () => {
+function Connected ()  {
   let name = sessionStorage.getItem("user");
   let role = sessionStorage.getItem("role");
 

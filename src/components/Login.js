@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import  Connected  from "../components/Connected"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -88,6 +89,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      
     </section>
   );
 };
