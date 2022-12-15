@@ -9,8 +9,6 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-
 
 
 import "./App.css";
@@ -18,26 +16,26 @@ import "bulma/css/bulma.css";
 
 import Home from "./page/Home";
 
-import Study from "./page/Study";
-import StudyRead from "./page/StudyRead";
+import Study from "./page/Study/Study";
+import StudyRead from "./page/Study/StudyRead";
 
-import AddStudy from "./page/AddStudy";
-import EditStudy from "./page/EditStudy";
+import AddStudy from "./page/Study/AddStudy";
+import EditStudy from "./page/Study/EditStudy";
 
-import StudySiteList from "./page/StudySiteList";
-import StudySiteRead from "./page/StudySiteRead";
+import StudySiteList from "./page/StudySite/StudySiteList";
+import StudySiteRead from "./page/StudySite/StudySiteRead";
 
-import AddStudySite from "./page/AddStudySite";
-import EditStudySite from "./page/EditStudySite";
+import AddStudySite from "./page/StudySite/AddStudySite";
+import EditStudySite from "./page/StudySite/EditStudySite";
 
-import SubjectList from "./page/SubjectList";
-import AddSubject from "./page/AddSubject";
-import EditSubject from "./page/EditSubject";
-import Subject from "./page/Subject";
+import SubjectList from "./page/Subject/SubjectList";
+import AddSubject from "./page/Subject/AddSubject";
+import EditSubject from "./page/Subject/EditSubject";
+import Subject from "./page/Subject/Subject";
 
-import SubjectEvent from "./page/SubjectEvent";
-import AddEvent from "./page/AddEvent";
-import EditEvent from "./page/EditEvent";
+import SubjectEvent from "./page/SubjectEvent/SubjectEvent";
+import AddEvent from "./page/SubjectEvent/AddEvent";
+import EditEvent from "./page/SubjectEvent/EditEvent";
 
 import Login from "./components/Login";
 import Register from "./components/Register";

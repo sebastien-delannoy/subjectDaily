@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import setCookie from "../functions/setCookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
   const [role, setRole] = useState("");
 
+  const [msg, setMsg] = useState("");
+
   const navigate = useNavigate();
-
-  const getRole = async () => {
-    const response = await axios.get(`http://localhost:4025/user/`);
-    console.log("coucou toi");
-    sessionStorage.setItem("username", response.data.name);
-    sessionStorage.setItem("role", response.data.role);
-  };
-
 
   const Auth = async (e) => {
     e.preventDefault();
@@ -25,11 +17,8 @@ const Login = () => {
       await axios.post("http://localhost:4025/login", {
         email: email,
         password: password,
+        role: role,
       });
-
-      let testCall = getRole();
-
-      
 
       navigate("/dashboard");
     } catch (error) {
@@ -47,6 +36,7 @@ const Login = () => {
             <div className="column is-4-desktop">
               <form onSubmit={Auth} className="box">
                 <p className="has-text-centered">{msg}</p>
+
                 <div className="field mt-5">
                   <label className="label">Email</label>
                   <div className="controls">
@@ -59,6 +49,7 @@ const Login = () => {
                     />
                   </div>
                 </div>
+
                 <div className="field mt-5">
                   <label className="label">Password</label>
                   <div className="controls">
@@ -71,6 +62,26 @@ const Login = () => {
                     />
                   </div>
                 </div>
+
+                <div className="field">
+                  <label className="label">Role</label>
+                  <div className="control">
+                    <div className="select is-fullwidth">
+                      <select
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                      >
+                        <option value="Cardiovascular">
+                          Global Study Manager
+                        </option>
+                        <option value="Central Nervous System">
+                          Pri;ary Investigator
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="field mt-5">
                   <button className="button is-success is-fullwidth">
                     Login
