@@ -66,14 +66,14 @@ export const Login = async (req, res) => {
     
     
     const accessToken = jwt.sign(
-      { userId, name, email },
+      { userId, name, email, role },
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "15s",
       }
     );
     const refreshToken = jwt.sign(
-      { userId, name, email },
+      { userId, name, email, role },
       process.env.REFRESH_TOKEN_SECRET,
       {
         expiresIn: "1d",
@@ -91,7 +91,7 @@ export const Login = async (req, res) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    res.json({ accessToken });
+    res.json({ accessToken, role });
   } catch (error) {
     res.status(404).json({ msg: "Email not found" });
   }

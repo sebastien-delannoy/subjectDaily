@@ -14,13 +14,19 @@ const Login = () => {
   const Auth = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4025/login", {
+      let response = await axios.post("http://localhost:4025/login", {
         email: email,
         password: password,
         role: role,
       });
 
-      navigate("/dashboard");
+      if (response.data.role === "Global Study Manager") {
+        navigate("/dashboard");
+      } else if (response.data.role === "Primary Investigator") {
+        navigate("/dashbrd");
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -60,25 +66,6 @@ const Login = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                  </div>
-                </div>
-
-                <div className="field">
-                  <label className="label">Role</label>
-                  <div className="control">
-                    <div className="select is-fullwidth">
-                      <select
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                      >
-                        <option value=" Global Study Manager">
-                          Global Study Manager
-                        </option>
-                        <option value="Primary Investigator">
-                          Primary Investigator
-                        </option>
-                      </select>
-                    </div>
                   </div>
                 </div>
 
