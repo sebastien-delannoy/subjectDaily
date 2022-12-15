@@ -65,27 +65,25 @@ const StudyRead = () => {
       <div className="column is-full">
         <br></br>
 
-        <table className="table is-striped is-fullwidth is-hoverable is-bordered" >
+        <table className="table  is-fullwidth is-hoverable is-bordered" >
           <thead>
             <tr>
-              <th>Id</th>
               <th>Therapeutic Area</th>
               <th>Study Code</th>
               <th>Description</th>
               <th>Study Name</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {studies.map((study, index) => (
               <tr key={study.id}>
-                <td>{study.id}</td>
                 <td>{study.therapeutic_area}</td>
                 <td>{study.study_code}</td>
                 <td>{study.short_desc}</td>
                 <td>{study.study_name}</td>
                 <td>
                   <Link
-                    hidden="until-found"
                     to={`study-site/${study.id}`}
                     className="button is-small is-info mr-2"
                   >

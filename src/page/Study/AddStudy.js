@@ -88,6 +88,7 @@ const AddStudy = () => {
                   <option value="Central Nervous System">Central Nervous System</option>
                   <option value="Immunology">Immunology</option>
                   <option value="Internal Medicine">Internal Medicine</option>
+                  <option value="Vaccines">Vaccines</option>
                   <option value="Woman Health">Woman Health</option>
                 </select>
               </div>
@@ -104,6 +105,7 @@ const AddStudy = () => {
                   value={study_code}
                   onChange={(e) => setStudycode(e.target.value)}
                   placeholder="Study Code"
+                  required
                 />
               </div>
             </div>
@@ -225,8 +227,9 @@ const AddStudy = () => {
 
           <div className="field">
             <button type="submit" className="button is-success">
-              Create
+              Create Study
             </button>
+            <button className="button is-info">Cancel</button>
           </div>
         </form>
       </div>

@@ -118,7 +118,6 @@ const Study = () => {
                 <td>{study.risk_score}</td>
                 <td>
                   <Link
-                    hidden="until-found"
                     to={`study-site/${study.id}`}
                     className="button is-small is-info mr-2"
                   >

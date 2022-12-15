@@ -6,6 +6,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [name, setName] = useState("");
 
   const [msg, setMsg] = useState("");
 
@@ -18,11 +19,16 @@ const Login = () => {
         email: email,
         password: password,
         role: role,
+        name: name,
       });
 
       if (response.data.role === "Global Study Manager") {
+        sessionStorage.setItem("user", response.data.name);
+        sessionStorage.setItem("role", response.data.role);
         navigate("/dashboard");
       } else if (response.data.role === "Primary Investigator") {
+        sessionStorage.setItem("user", response.data.name);
+        sessionStorage.setItem("role", response.data.role);
         navigate("/dashbrd");
       } else {
         navigate("/login");

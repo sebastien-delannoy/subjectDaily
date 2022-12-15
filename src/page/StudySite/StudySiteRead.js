@@ -74,21 +74,18 @@ const StudySiteList = () => {
         </p>
         <br></br>
 
-        <table className="table is-striped is-fullwidth is-hoverable">
+        <table className="table is-fullwidth is-hoverable is-bordered">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Study Id</th>
               <th>Country</th>
               <th>Site Reference</th>
               <th>Centre</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {studysites.map((studysite, index) => (
               <tr key={studysite.id}>
-                <td>{studysite.id}</td>
-                <td>{studysite.study_id}</td>
                 <td>{studysite.country}</td>
                 <td>{studysite.site_reference}</td>
                 <td>{studysite.centre}</td>

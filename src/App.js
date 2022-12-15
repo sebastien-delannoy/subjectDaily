@@ -1,15 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Link,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import jwt_decode from "jwt-decode";
-
+import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import React from "react";
 
 import "./App.css";
 import "bulma/css/bulma.css";
@@ -45,61 +35,6 @@ import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
 
 function App() {
-
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [token, setToken] = useState("");
-  const [expire, setExpire] = useState("");
-
-
-  // useEffect(() => {
-  //   refreshToken();
-  // }, []);
-
-  // const refreshToken = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4025/token");
-  //     setToken(response.data.accessToken);
-  //     const decoded = jwt_decode(response.data.accessToken);
-  //     setName(decoded.name);
-  //     setRole(decoded.role);
-  //     setExpire(decoded.exp);
-
-  //     console.log(response.data.accessToken);
-  //   } catch (error) {
-  //     if (error.response) {
-  //      console.log(error)
-  //     }
-  //   }
-  // };
-
-  // const axiosJWT = axios.create();
-
-  // axiosJWT.interceptors.request.use(
-  //   async (config) => {
-  //     const currentDate = new Date();
-  //     if (expire * 1000 < currentDate.getTime()) {
-  //       const response = await axios.get("http://localhost:4025/token");
-  //       config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-  //       setToken(response.data.accessToken);
-  //       const decoded = jwt_decode(response.data.accessToken);
-  //       setName(decoded.name);
-  //       setRole(decoded.role);
-  //       setExpire(decoded.exp);
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
-  // sessionStorage.setItem("username", name);
-  // sessionStorage.setItem("role", role);
-
-  // let connectedRole=role;
-
-  let connectedRole="Global Study Manager";
-
   return (
     <div className="App">
       <Router>
@@ -118,21 +53,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dash" element={[<Dashboard />, <Navbar />]} />
-          <Route
-            exact
-            path="/dashboard"
-            element={
-              connectedRole === "Global Study Manager" ? (
-                <Study />
-              ) : (
-                <Navigate replace to={"/dashbrd"} />
-              )
-            }
-          />
-          <Route path="/dashboard" element={<Study />} />
-          <Route path="/dashbrd" element={<StudyRead />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Study />} />
+          <Route path="/dashbrd" element={<StudyRead />} />
           <Route path="/dashboard/add" element={<AddStudy />} />
           <Route path="/dashboard/edit/:id" element={<EditStudyDetail />} />
           <Route
@@ -176,7 +100,7 @@ function App() {
             path="/dashboard/study-site/:studyId/subject/:siteId/view/:id"
             element={<SubjectEventRead />}
           />
-          
+
           <Route
             path="/dashboard/study-site/:studyId/subject/:siteId/eventlist/:id/create"
             element={<AddEvent />}

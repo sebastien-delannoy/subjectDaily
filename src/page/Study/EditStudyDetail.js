@@ -109,10 +109,10 @@ const EditStudyDetail = () => {
   };
 
   return (
-    <div className="Page">
+    <div className="Fragment">
       <div className="column is-full">
         <p>
-          <strong>Update Study Information</strong>
+          <strong>Update Study Information: {study_code}</strong>
         </p>
         <br></br>
         <form onSubmit={updateStudy}>

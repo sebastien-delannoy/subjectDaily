@@ -13,20 +13,19 @@ export const getUsers = async (req, res) => {
   }
 };
 
-export const getUser = async(req, res) =>{
+export const getUser = async (req, res) => {
   try {
-      const response = await Users.findOne({
-          where:{
-              email: req.params.email
-          }
-          
-      });
-     console.log (req.params.email);
-      res.status(200).json(response);
+    const response = await Users.findOne({
+      where: {
+        email: req.params.email,
+      },
+    });
+    console.log(req.params.email);
+    res.status(200).json(response);
   } catch (error) {
-      console.log(error.message);
+    console.log(error.message);
   }
-}
+};
 
 export const Register = async (req, res) => {
   const { name, email, role, password, confPassword } = req.body;
@@ -63,8 +62,7 @@ export const Login = async (req, res) => {
     const name = user[0].name;
     const email = user[0].email;
     const role = user[0].role;
-    
-    
+
     const accessToken = jwt.sign(
       { userId, name, email, role },
       process.env.ACCESS_TOKEN_SECRET,
@@ -91,7 +89,7 @@ export const Login = async (req, res) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    res.json({ accessToken, role });
+    res.json({ accessToken, role, name });
   } catch (error) {
     res.status(404).json({ msg: "Email not found" });
   }
