@@ -71,11 +71,11 @@ const Login = () => {
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                       >
-                        <option value="Cardiovascular">
+                        <option value=" Global Study Manager">
                           Global Study Manager
                         </option>
-                        <option value="Central Nervous System">
-                          Pri;ary Investigator
+                        <option value="Primary Investigator">
+                          Primary Investigator
                         </option>
                       </select>
                     </div>

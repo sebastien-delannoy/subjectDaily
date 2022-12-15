@@ -51,7 +51,7 @@ import {
 const router = express.Router();
 
 router.get("/studies", verifyToken, getStudies);
-router.get("/studies/:id", verifyToken, getStudyById);
+router.get("/study/:id", verifyToken, getStudyById);
 router.post("/studies", verifyToken, createStudy);
 router.patch("/studies/:id", verifyToken, updateStudy);
 router.delete("/studies/:id", verifyToken, deleteStudy);

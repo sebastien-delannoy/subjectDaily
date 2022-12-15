@@ -83,7 +83,7 @@ const Study = () => {
         </Link>
         <br></br>
         <br></br>
-        <table className="table is-striped is-fullwidth">
+        <table className="table  is-fullwidth is-hoverable is-bordered">
           <thead>
             <tr>
               <th>Id</th>
@@ -97,6 +97,7 @@ const Study = () => {
               <th>Enrollment Rate (Monthly)</th>
               <th>Actual Enrollment</th>
               <th>Risk Score</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>

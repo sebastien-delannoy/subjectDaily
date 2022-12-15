@@ -89,7 +89,7 @@ const SubjectList = () => {
                 <td>{subject.subject_status}</td>
                 <td>{subject.current_visit}</td>
                 <td>
-                  <Link to={`create`} className="button is-small is-info mr-2">
+                  <Link to={`view/${subject.id}`} className="button is-small is-info mr-2">
                     Subject Events
                   </Link>
                 </td>

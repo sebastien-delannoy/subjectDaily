@@ -20,7 +20,7 @@ import Study from "./page/Study/Study";
 import StudyRead from "./page/Study/StudyRead";
 
 import AddStudy from "./page/Study/AddStudy";
-import EditStudy from "./page/Study/EditStudy";
+import EditStudyDetail from "./page/Study/EditStudyDetail";
 
 import StudySiteList from "./page/StudySite/StudySiteList";
 import StudySiteRead from "./page/StudySite/StudySiteRead";
@@ -34,6 +34,7 @@ import EditSubject from "./page/Subject/EditSubject";
 import Subject from "./page/Subject/Subject";
 
 import SubjectEvent from "./page/SubjectEvent/SubjectEvent";
+import SubjectEventRead from "./page/SubjectEvent/SubjectEventRead";
 import AddEvent from "./page/SubjectEvent/AddEvent";
 import EditEvent from "./page/SubjectEvent/EditEvent";
 
@@ -51,52 +52,53 @@ function App() {
   const [expire, setExpire] = useState("");
 
 
-  useEffect(() => {
-    refreshToken();
-  }, []);
+  // useEffect(() => {
+  //   refreshToken();
+  // }, []);
 
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:4025/token");
-      setToken(response.data.accessToken);
-      const decoded = jwt_decode(response.data.accessToken);
-      setName(decoded.name);
-      setRole(decoded.role);
-      setExpire(decoded.exp);
+  // const refreshToken = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4025/token");
+  //     setToken(response.data.accessToken);
+  //     const decoded = jwt_decode(response.data.accessToken);
+  //     setName(decoded.name);
+  //     setRole(decoded.role);
+  //     setExpire(decoded.exp);
 
-      console.log(response.data.accessToken);
-    } catch (error) {
-      if (error.response) {
-       console.log(error)
-      }
-    }
-  };
+  //     console.log(response.data.accessToken);
+  //   } catch (error) {
+  //     if (error.response) {
+  //      console.log(error)
+  //     }
+  //   }
+  // };
 
-  const axiosJWT = axios.create();
+  // const axiosJWT = axios.create();
 
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      const currentDate = new Date();
-      if (expire * 1000 < currentDate.getTime()) {
-        const response = await axios.get("http://localhost:4025/token");
-        config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-        setToken(response.data.accessToken);
-        const decoded = jwt_decode(response.data.accessToken);
-        setName(decoded.name);
-        setRole(decoded.role);
-        setExpire(decoded.exp);
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
-  sessionStorage.setItem("username", name);
-  sessionStorage.setItem("role", role);
+  // axiosJWT.interceptors.request.use(
+  //   async (config) => {
+  //     const currentDate = new Date();
+  //     if (expire * 1000 < currentDate.getTime()) {
+  //       const response = await axios.get("http://localhost:4025/token");
+  //       config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+  //       setToken(response.data.accessToken);
+  //       const decoded = jwt_decode(response.data.accessToken);
+  //       setName(decoded.name);
+  //       setRole(decoded.role);
+  //       setExpire(decoded.exp);
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
+  // sessionStorage.setItem("username", name);
+  // sessionStorage.setItem("role", role);
 
-  let connectedRole=role;
+  // let connectedRole=role;
 
+  let connectedRole="Global Study Manager";
 
   return (
     <div className="App">
@@ -107,11 +109,11 @@ function App() {
           <Link to="/login">Login</Link>
         </nav>
 
-        {/* <div className="Fragment">
+        <div className="Fragment">
           <h1>
             <Connected />
           </h1>
-        </div> */}
+        </div>
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -132,7 +134,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard/add" element={<AddStudy />} />
-          <Route path="/dashboard/edit/:id" element={<EditStudy />} />
+          <Route path="/dashboard/edit/:id" element={<EditStudyDetail />} />
           <Route
             path="/dashboard/study-site/:studyId"
             element={<StudySiteList />}
@@ -171,7 +173,12 @@ function App() {
           />
 
           <Route
-            path="/dashbrd/study-site/:studyId/subject/:siteId/eventlist/:id/create"
+            path="/dashboard/study-site/:studyId/subject/:siteId/view/:id"
+            element={<SubjectEventRead />}
+          />
+          
+          <Route
+            path="/dashboard/study-site/:studyId/subject/:siteId/eventlist/:id/create"
             element={<AddEvent />}
           />
 

@@ -8,13 +8,15 @@ const StudySiteList = () => {
   const [name, setName] = useState("");
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
+  const [study, setStudy] = useState([]);
 
-  let { StudyCode, studyId } = useParams();
+  let { studyId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     refreshToken();
     getStudySiteByStudy();
+    getStudyNameById();
   }, []);
 
   const refreshToken = async () => {
@@ -66,6 +68,23 @@ const StudySiteList = () => {
     setStudySite(response.data);
   };
 
+  const getStudyNameById = async () => {
+    try {
+    const response = await axiosJWT.get(
+      `http://localhost:4025/study/${studyId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setStudy(response.data);
+    
+  } catch (error) {
+    console.log(error);
+  }
+  };
+
   const deleteStudySite = async (id) => {
     try {
       await axiosJWT.delete(`http://localhost:4025/studysite/${id}`, {
@@ -83,7 +102,7 @@ const StudySiteList = () => {
     <div className="Fragment">
       <div className="column is-full">
         <p>
-          <strong>Study Site for {studyId}</strong>
+          <strong>Study Site for clinical study {study.study_code}</strong>
         </p>
         <br></br>
         <Link to={`new`} className="button is-success">
@@ -93,8 +112,6 @@ const StudySiteList = () => {
         <table className="table is-striped is-fullwidth is-hoverable">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Study Id</th>
               <th>Country</th>
               <th>Site Reference</th>
               <th>Centre</th>
@@ -107,8 +124,6 @@ const StudySiteList = () => {
           <tbody>
             {studysites.map((studysite, index) => (
               <tr key={studysite.id}>
-                <td>{studysite.id}</td>
-                <td>{studysite.study_id}</td>
                 <td>{studysite.country}</td>
                 <td>
                   <a href={`dashboard/edit/${studysite.id}`}>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
-const EditStudy = () => {
+const EditStudyDetail = () => {
   const [name, setName] = useState("");
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
@@ -91,7 +91,7 @@ const EditStudy = () => {
   };
 
   const getStudyById = async () => {
-    const response = await axiosJWT.get(`http://localhost:4025/studies/${id}`, {
+    const response = await axiosJWT.get(`http://localhost:4025/study/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -274,4 +274,4 @@ const EditStudy = () => {
   );
 };
 
-export default EditStudy;
+export default EditStudyDetail;

@@ -59,7 +59,7 @@ const Connected = () => {
   var message;
   name === ""
     ? (message = "")
-    : (message = "Hello " + name + ", you are connected as " + role);
+    : (message = name + ", you are connected as " + role);
 
   return (
     <div className="Breadcrumb">

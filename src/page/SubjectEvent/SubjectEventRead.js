@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
-const StudyRead = () => {
+
+const SubjectEventRead= () => {
+  const [events, setEvent] = useState([]);
   const [name, setName] = useState("");
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   const [studies, setStudy] = useState([]);
   const navigate = useNavigate();
 
+  let { studyId, siteId, id } = useParams();
+
   useEffect(() => {
     refreshToken();
-    getStudies();
+    getEventBySubject();
   }, []);
 
   const refreshToken = async () => {
@@ -51,47 +55,53 @@ const StudyRead = () => {
     }
   );
 
-  const getStudies = async () => {
-    const response = await axiosJWT.get("http://localhost:4025/studies", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setStudy(response.data);
+  const getEventBySubject = async () => {
+    const response = await axiosJWT.get(
+      `http://localhost:4025/event-list/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setEvent(response.data);
   };
+
 
   return (
     <div className="Fragment">
+      
       <div className="column is-full">
+       
         <br></br>
-
-        <table className="table is-striped is-fullwidth is-hoverable is-bordered" >
+        <table className="table is-striped is-fullwidth is-hoverable">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Therapeutic Area</th>
-              <th>Study Code</th>
-              <th>Description</th>
-              <th>Study Name</th>
+              <th>Study</th>
+              <th>Site</th>
+              <th>Subject</th>
+              <th>Event</th>
+              <th>Category</th>
+              <th>Issue Description</th>
+              <th>Resolution</th>
+              <th>Criticality</th>
+              <th>Closed</th>
             </tr>
           </thead>
           <tbody>
-            {studies.map((study, index) => (
-              <tr key={study.id}>
-                <td>{study.id}</td>
-                <td>{study.therapeutic_area}</td>
-                <td>{study.study_code}</td>
-                <td>{study.short_desc}</td>
-                <td>{study.study_name}</td>
-                <td>
-                  <Link
-                    hidden="until-found"
-                    to={`study-site/${study.id}`}
-                    className="button is-small is-info mr-2"
-                  >
-                    Study Sites
-                  </Link>
-                </td>
+            {events.map((event, index) => (
+              <tr key={event.id}>
+                <td>{event.study_id}</td>
+                <td>{event.site_id}</td>
+                <td>{event.subject_id}</td>
+                <td>{event.event_id}</td>
+                <td>{event.event_category}</td>
+                <td>{event.event_desc}</td>
+                <td>{event.event_res}</td>
+                <td>{event.event_critic}</td>
+                <td>{event.event_closed}</td>
+                
               </tr>
             ))}
           </tbody>
@@ -101,4 +111,4 @@ const StudyRead = () => {
   );
 };
 
-export default StudyRead;
+export default SubjectEventRead;
