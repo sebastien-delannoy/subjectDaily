@@ -102,7 +102,7 @@ function App() {
           />
 
           <Route
-            path="/dashboard/study-site/:studyId/subject/:siteId/eventlist/:id/create"
+            path="/dashbrd/study-site/:studyId/subject/:siteId/eventlist/:id/create"
             element={<AddEvent />}
           />
 

@@ -86,6 +86,7 @@ const StudySiteList = () => {
           <tbody>
             {studysites.map((studysite, index) => (
               <tr key={studysite.id}>
+                
                 <td>{studysite.country}</td>
                 <td>{studysite.site_reference}</td>
                 <td>{studysite.centre}</td>
