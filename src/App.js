@@ -86,7 +86,7 @@ function App() {
             }
           />
 
-          <Route path="/dashbrd" element={<StudyRead />} />
+          
           <Route path="/dashboard/add" element={<AddStudy />} />
           <Route path="/dashboard/edit/:id" element={<EditStudyDetail />} />
           <Route
