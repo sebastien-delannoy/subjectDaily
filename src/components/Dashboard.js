@@ -24,7 +24,6 @@ const Dashboard = () => {
       setName(decoded.name);
       setExpire(decoded.exp);
 
-      console.log(response.data.accessToken);
 
     } catch (error) {
       if (error.response) {

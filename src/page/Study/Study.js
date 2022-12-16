@@ -127,7 +127,7 @@ const Study = () => {
                     onClick={() => deleteStudy(study.id)}
                     className="button is-small is-danger"
                   >
-                    Archive Study
+                    Delete Study
                   </button>
                 </td>
               </tr>

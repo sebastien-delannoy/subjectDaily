@@ -236,7 +236,7 @@ const EditEvent = () => {
 
           <div className="field">
             <button type="submit" className="button is-success">
-              Update Subject Information
+              Update Subject Event Information
             </button>
           </div>
         </form>

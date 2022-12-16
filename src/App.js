@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import React from "react";
 
 import "./App.css";
@@ -35,6 +41,9 @@ import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
 
 function App() {
+  let userRole = sessionStorage.getItem("role");
+  console.log(userRole);
+
   return (
     <div className="App">
       <Router>
@@ -55,7 +64,28 @@ function App() {
           <Route path="/dash" element={[<Dashboard />, <Navbar />]} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Study />} />
+          <Route
+            path="/dashboard"
+            element={
+              userRole === "Global Study Manager" ? (
+                <Study />
+              ) : (
+                <Navigate replace to={"/dashbrd"} />
+              )
+            }
+          />
+
+          <Route
+            path="/dashbrd"
+            element={
+              userRole === "Primary Investigator" ? (
+                <StudyRead />
+              ) : (
+                <Navigate replace to={"/dashboard"} />
+              )
+            }
+          />
+
           <Route path="/dashbrd" element={<StudyRead />} />
           <Route path="/dashboard/add" element={<AddStudy />} />
           <Route path="/dashboard/edit/:id" element={<EditStudyDetail />} />

@@ -1,6 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function Connected ()  {
+const Connected = () => {
   let name = sessionStorage.getItem("user");
   let role = sessionStorage.getItem("role");
 
@@ -8,6 +9,10 @@ function Connected ()  {
   name === "" || name === null
     ? (message = "")
     : (message = name + ", you are connected as " + role);
+
+    console.log (" im here");
+    const navigate = useNavigate();
+    navigate(0);
 
   return (
     <div className="Breadcrumb">
